@@ -1,0 +1,61 @@
+html
+  head
+    title My Blogs
+    link(
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+    )
+  body
+    nav.navbar.navbar-dark.bg-dark 
+      .container-fluid 
+        h1.navbar-brand LTI Blogs
+        if session.lti_message_type != "ContentItemSelectionRequest"
+          a.btn.btn-sm.btn-outline-light(href= session.launch_presentation_return_url ) Back to Blackboard
+          
+    .container.p-3
+      .row 
+        .col-12
+          .card.bg-light
+            h5.card-header= 'Welcome, ' + session.lis_person_name_full + '!' 
+            .card-body 
+              h5.card-title How to use LTI Blogs 
+              p.card-text LTI Blogs allows you to write and share blogs across classes. Comments posted by students will be visible to all those reading the blog, regardless of the class that the student is enrolled in. This allows students to communicate with other students in different class groups of the same course.
+              button.btn.btn-primary(type="button" data-toggle="modal" data-target="#createBlogModal") Create blog
+              form(action="#" method="POST" id="newBlogForm")
+                .modal.fade(id="createBlogModal" tabindex="-1" aria-hidden="true" role="dialog")
+                  .modal-dialog.modal-dialog-centered(role="document")
+                    .modal-content 
+                      .modal-header
+                        h5.modal-title Create Blog 
+                      .modal-body
+                          .form-group
+                            label(for="title") Title
+                            input.form-control(id="newBlogTitle" name="title" required)
+                          br
+                          .form-group 
+                            textarea.form-control(id="newBlogContent" name="content" cols="30" rows="10" required) 
+                      .modal-footer 
+                        button.btn.btn-secondary(type="button" data-dismiss="modal" id="clodeNewBlogModal") Close
+                        button.btn.btn-primary(type="submit") Save
+
+    include components/table.pug
+
+script(
+  src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+  integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+  crossorigin="anonymous"
+)
+script(
+  src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+  integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+  crossorigin="anonymous"
+)
+script(
+  src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+  integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+  crossorigin="anonymous"
+)
+
+script(
+  src="/static/blogs_service.js"
+)

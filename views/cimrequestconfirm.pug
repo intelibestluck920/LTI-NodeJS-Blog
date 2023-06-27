@@ -1,0 +1,10 @@
+html
+  head
+    title Confirm Deep Link 
+  body
+    form(action=url method="POST" encType="application/x-www-form-urlencoded" id="cimRequestConfirmation")
+      each val, key in params
+        input(name=key value=val type="hidden")
+script(
+  src="/static/cim_request_confirmation.js"
+)
